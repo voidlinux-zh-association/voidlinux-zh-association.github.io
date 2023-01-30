@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="utf-8">
+        <title>全盘 ZFS - Void Linux Handbook</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+        </script>
+		<!-- Work around some values being stored in localStorage wrapped in quotes -->
+		<script type="text/javascript">
+			try {
+				var sidebar = localStorage.getItem('mdbook-sidebar');
+
+				if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+					localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+				}
+			} catch (e) { }
+		</script>
+
+		<header>
+			<nav id="void-nav">
+				<ul>
+					<li><a id="skip-to-content" tabindex="1" href="#main">Skip to content</a></li>
+					<li>
+						<button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+								<path d="M1 3v2h18V3zm0 8h18V9H1zm0 6h18v-2H1z"/>
+							</svg>
+						</button>
+					</li>
+					<li>
+						<button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+								<path d="M7.5 13c3.04 0 5.5-2.46 5.5-5.5S10.54 2 7.5 2 2 4.46 2 7.5 4.46 13 7.5 13zm4.55.46C10.79 14.43 9.21 15 7.5 15 3.36 15 0 11.64 0 7.5S3.36 0 7.5 0C11.64 0 15 3.36 15 7.5c0 1.71-.57 3.29-1.54 4.55l6.49 6.49-1.41 1.41-6.49-6.49z"/>
+							</svg>
+						</button>
+					</li>
+                                        <noscript>
+                                          <li class="js-unavailable">Search functionality requires JavaScript</li>
+                                        </noscript>
+				</ul>
+				<ul id="nav-right">
+					<li><a href="https://www.voidlinux.org">Home</a></li>
+					<li><a href="https://www.voidlinux.org/news/">News</a></li>
+					<li><a href="https://www.voidlinux.org/download/">Download</a></li>
+					<li><a href="https://www.voidlinux.org/packages/">Packages</a></li>
+					<li><a href="https://docs.voidlinux.org">Documentation</a></li>
+					<li><a href="https://man.voidlinux.org/">Manual Pages</a></li>
+					<li><a href="https://github.com/void-linux">GitHub</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<div id="content">
+
+			<!-- Hide / unhide sidebar before it is displayed -->
+			<script type="text/javascript">
+				var html = document.querySelector('html');
+				var sidebar = 'hidden';
+				if (document.body.clientWidth >= 1080) {
+					try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+					sidebar = sidebar || 'visible';
+				}
+				html.classList.remove('sidebar-visible');
+				html.classList.add("sidebar-" + sidebar);
+			</script>
+
+			<nav id="sidebar" aria-label="Table of contents">
+				<ol class="chapter"><li class="chapter-item expanded "><a href="../../about/index.html"><strong aria-hidden="true">1.</strong> 关于</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../about/history.html"><strong aria-hidden="true">1.1.</strong> 历史</a></li><li class="chapter-item expanded "><a href="../../about/about-this-handbook.html"><strong aria-hidden="true">1.2.</strong> 关于本手册</a></li><li class="chapter-item expanded "><a href="../../about/infradocs.html"><strong aria-hidden="true">1.3.</strong> InfraDocs</a></li></ol></li><li class="chapter-item expanded "><a href="../../installation/index.html"><strong aria-hidden="true">2.</strong> 安装</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../installation/live-images/index.html"><strong aria-hidden="true">2.1.</strong> Live 安装程序</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../installation/live-images/prep.html"><strong aria-hidden="true">2.1.1.</strong> 准备安装介质</a></li><li class="chapter-item expanded "><a href="../../installation/live-images/partitions.html"><strong aria-hidden="true">2.1.2.</strong> 分区说明</a></li><li class="chapter-item expanded "><a href="../../installation/live-images/guide.html"><strong aria-hidden="true">2.1.3.</strong> 安装指南</a></li></ol></li><li class="chapter-item expanded "><a href="../../installation/guides/index.html"><strong aria-hidden="true">2.2.</strong> 进阶安装指南</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../installation/guides/chroot.html"><strong aria-hidden="true">2.2.1.</strong> 通过 chroot 安装 (x86/x86_64/aarch64)</a></li><li class="chapter-item expanded "><a href="../../installation/guides/fde.html"><strong aria-hidden="true">2.2.2.</strong> 全盘加密</a></li><li class="chapter-item expanded "><a href="../../installation/guides/zfs.html" class="active"><strong aria-hidden="true">2.2.3.</strong> 全盘 ZFS</a></li><li class="chapter-item expanded "><a href="../../installation/guides/arm-devices/index.html"><strong aria-hidden="true">2.2.4.</strong> ARM 设备</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../installation/guides/arm-devices/platforms.html"><strong aria-hidden="true">2.2.4.1.</strong> 所支持的平台</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../installation/musl.html"><strong aria-hidden="true">2.3.</strong> musl</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/index.html"><strong aria-hidden="true">3.</strong> 配置</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/package-documentation/index.html"><strong aria-hidden="true">3.1.</strong> 软件文档</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/package-documentation/man.html"><strong aria-hidden="true">3.1.1.</strong> 手册页</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/firmware.html"><strong aria-hidden="true">3.2.</strong> 驱动</a></li><li class="chapter-item expanded "><a href="../../config/locales.html"><strong aria-hidden="true">3.3.</strong> 本地化与翻译</a></li><li class="chapter-item expanded "><a href="../../config/users-and-groups.html"><strong aria-hidden="true">3.4.</strong> 用户和用户组</a></li><li class="chapter-item expanded "><a href="../../config/services/index.html"><strong aria-hidden="true">3.5.</strong> 服务与守护进程 - runit</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/services/user-services.html"><strong aria-hidden="true">3.5.1.</strong> 每个用户的服务</a></li><li class="chapter-item expanded "><a href="../../config/services/logging.html"><strong aria-hidden="true">3.5.2.</strong> 日志</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/rc-files.html"><strong aria-hidden="true">3.6.</strong> rc.conf, rc.local 还有 rc.shutdown</a></li><li class="chapter-item expanded "><a href="../../config/cron.html"><strong aria-hidden="true">3.7.</strong> Cron</a></li><li class="chapter-item expanded "><a href="../../config/ssd.html"><strong aria-hidden="true">3.8.</strong> 固态硬盘</a></li><li class="chapter-item expanded "><a href="../../config/security/index.html"><strong aria-hidden="true">3.9.</strong> 安全</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/security/apparmor.html"><strong aria-hidden="true">3.9.1.</strong> AppArmor</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/date-time.html"><strong aria-hidden="true">3.10.</strong> 日期和时间</a></li><li class="chapter-item expanded "><a href="../../config/kernel.html"><strong aria-hidden="true">3.11.</strong> 内核</a></li><li class="chapter-item expanded "><a href="../../config/power-management.html"><strong aria-hidden="true">3.12.</strong> 电源管理</a></li><li class="chapter-item expanded "><a href="../../config/network/index.html"><strong aria-hidden="true">3.13.</strong> 网络</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/network/firewalls.html"><strong aria-hidden="true">3.13.1.</strong> 防火墙</a></li><li class="chapter-item expanded "><a href="../../config/network/wpa_supplicant.html"><strong aria-hidden="true">3.13.2.</strong> wpa_supplicant</a></li><li class="chapter-item expanded "><a href="../../config/network/iwd.html"><strong aria-hidden="true">3.13.3.</strong> IWD</a></li><li class="chapter-item expanded "><a href="../../config/network/networkmanager.html"><strong aria-hidden="true">3.13.4.</strong> NetworkManager</a></li><li class="chapter-item expanded "><a href="../../config/network/connman.html"><strong aria-hidden="true">3.13.5.</strong> ConnMan</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/network-filesystems.html"><strong aria-hidden="true">3.14.</strong> 网络文件系统</a></li><li class="chapter-item expanded "><a href="../../config/session-management.html"><strong aria-hidden="true">3.15.</strong> Session 和 Seat 管理</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/index.html"><strong aria-hidden="true">3.16.</strong> 图形 Session</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/graphical-session/graphics-drivers/index.html"><strong aria-hidden="true">3.16.1.</strong> 图形设备</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/graphical-session/graphics-drivers/amd.html"><strong aria-hidden="true">3.16.1.1.</strong> AMD or ATI</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/graphics-drivers/intel.html"><strong aria-hidden="true">3.16.1.2.</strong> Intel</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/graphics-drivers/nvidia.html"><strong aria-hidden="true">3.16.1.3.</strong> NVIDIA</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/graphics-drivers/optimus.html"><strong aria-hidden="true">3.16.1.4.</strong> NVIDIA Optimus</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/graphical-session/xorg.html"><strong aria-hidden="true">3.16.2.</strong> Xorg</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/wayland.html"><strong aria-hidden="true">3.16.3.</strong> Wayland</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/fonts.html"><strong aria-hidden="true">3.16.4.</strong> 字体</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/icons.html"><strong aria-hidden="true">3.16.5.</strong> 图标</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/gnome.html"><strong aria-hidden="true">3.16.6.</strong> GNOME</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/kde.html"><strong aria-hidden="true">3.16.7.</strong> KDE</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/media/index.html"><strong aria-hidden="true">3.17.</strong> 多媒体</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/media/alsa.html"><strong aria-hidden="true">3.17.1.</strong> ALSA</a></li><li class="chapter-item expanded "><a href="../../config/media/pipewire.html"><strong aria-hidden="true">3.17.2.</strong> PipeWire</a></li><li class="chapter-item expanded "><a href="../../config/media/pulseaudio.html"><strong aria-hidden="true">3.17.3.</strong> PulseAudio</a></li><li class="chapter-item expanded "><a href="../../config/media/sndio.html"><strong aria-hidden="true">3.17.4.</strong> sndio</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/bluetooth.html"><strong aria-hidden="true">3.18.</strong> 蓝牙</a></li><li class="chapter-item expanded "><a href="../../config/texlive.html"><strong aria-hidden="true">3.19.</strong> TeX Live</a></li><li class="chapter-item expanded "><a href="../../config/external-applications.html"><strong aria-hidden="true">3.20.</strong> 更多程序</a></li><li class="chapter-item expanded "><a href="../../config/print/index.html"><strong aria-hidden="true">3.21.</strong> 打印</a></li><li class="chapter-item expanded "><a href="../../config/containers-and-vms/index.html"><strong aria-hidden="true">3.22.</strong> 容器与虚拟化</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/containers-and-vms/chroot.html"><strong aria-hidden="true">3.22.1.</strong> Chroots and Containers</a></li><li class="chapter-item expanded "><a href="../../config/containers-and-vms/libvirt.html"><strong aria-hidden="true">3.22.2.</strong> libvirt</a></li><li class="chapter-item expanded "><a href="../../config/containers-and-vms/lxc.html"><strong aria-hidden="true">3.22.3.</strong> LXC</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/openpgp.html"><strong aria-hidden="true">3.23.</strong> OpenPGP</a></li></ol></li><li class="chapter-item expanded "><a href="../../xbps/index.html"><strong aria-hidden="true">4.</strong> XBPS 软件管理器</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../xbps/advanced-usage.html"><strong aria-hidden="true">4.1.</strong> 高级用法</a></li><li class="chapter-item expanded "><a href="../../xbps/repositories/index.html"><strong aria-hidden="true">4.2.</strong> 软件源</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../xbps/repositories/mirrors/index.html"><strong aria-hidden="true">4.2.1.</strong> 镜像</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../xbps/repositories/mirrors/changing.html"><strong aria-hidden="true">4.2.1.1.</strong> 更换镜像</a></li><li class="chapter-item expanded "><a href="../../xbps/repositories/mirrors/tor.html"><strong aria-hidden="true">4.2.1.2.</strong> 使用 Tor 镜像</a></li></ol></li><li class="chapter-item expanded "><a href="../../xbps/repositories/restricted.html"><strong aria-hidden="true">4.2.2.</strong> 受限制的软件</a></li><li class="chapter-item expanded "><a href="../../xbps/repositories/custom.html"><strong aria-hidden="true">4.2.3.</strong> 自定义的软件源</a></li><li class="chapter-item expanded "><a href="../../xbps/repositories/signing.html"><strong aria-hidden="true">4.2.4.</strong> 签名软件源</a></li></ol></li><li class="chapter-item expanded "><a href="../../xbps/troubleshooting/index.html"><strong aria-hidden="true">4.3.</strong> XBPS 的故障排除</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../xbps/troubleshooting/common-issues.html"><strong aria-hidden="true">4.3.1.</strong> 常见问题</a></li><li class="chapter-item expanded "><a href="../../xbps/troubleshooting/static.html"><strong aria-hidden="true">4.3.2.</strong> Static XBPS</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../contributing/index.html"><strong aria-hidden="true">5.</strong> 贡献</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contributing/void-docs/index.html"><strong aria-hidden="true">5.1.</strong> 贡献于 void-docs</a></li></ol></li></ol>
+			</nav>
+
+			<!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+			<script type="text/javascript">
+				document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+	document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+	Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+		link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+	});
+			</script>
+
+			<div id="page-wrapper">
+				<div id="search-wrapper" class="hidden">
+					<form id="searchbar-outer" class="searchbar-outer">
+						<input type="search" name="search" id="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+					</form>
+					<div id="searchresults-outer" class="searchresults-outer hidden">
+						<div id="searchresults-header" class="searchresults-header"></div>
+						<ul id="searchresults">
+						</ul>
+					</div>
+				</div>
+
+				<main id="main">
+					<h1 id="全盘-zfs"><a class="header" href="#全盘-zfs">全盘 ZFS</a></h1>
+<p>因为 Void 的安装程序不支持 ZFS，所以有必要通过 chroot 来安装。除了一些关于引导程序和 initramfs 支持的注意事项外，在 ZFS 根文件系统上安装 Void 与其他高级安装没有明显区别。<a href="https://zfsbootmenu.org">ZFSBootMenu</a> 是一个从头开始设计的引导程序，支持直接从 ZFS 池中启动 Linux 发行版。然而，也可以使用传统的引导程序与ZFS根文件系统。</p>
+<h2 id="zfsbootmenu"><a class="header" href="#zfsbootmenu">ZFSBootMenu</a></h2>
+<p>尽管它可以启动（并且可以在上面运行）各种各样的发行版，但 ZFSBootMenu 官方认为 Void 是一等的发行版。ZFSBootMenu 支持原生的 ZFS 加密，提供方便的恢复环境，可用于克隆先前的快照或在预启动环境中执行高级操作，并支持从任何可被现代 ZFS 驱动程序导入的池中启动。ZFSBootMenu 文档除其他内容外，还提供了几个从头开始安装 Void 系统的<a href="https://docs.zfsbootmenu.org/en/latest/guides/void-linux.html">步骤指南</a>。<a href="https://docs.zfsbootmenu.org/en/latest/guides/void-linux/uefi.html">UEFI 指南</a>描述了现代系统引导 Void 系统的过程。对于传统的 BIOS 系统，<a href="https://docs.zfsbootmenu.org/en/latest/guides/void-linux/syslinux-mbr.html">syslinux 指南</a>提供了类似的说明。</p>
+<h2 id="传统引导程序"><a class="header" href="#传统引导程序">传统引导程序</a></h2>
+<p>对于那些希望放弃 ZFSBootMenu 的人来说，可以用另一个引导程序来引导 Void 系统。为了避免不必要的复杂性，使用ZFSBootMenu 以外的引导程序的系统应该计划使用单独的 <code>/boot</code>，它位于ext4或xfs文件系统中。</p>
+<h3 id="安装媒介"><a class="header" href="#安装媒介">安装媒介</a></h3>
+<p>把 Void 安装到 ZFS 根目录下需要一个带有 ZFS 驱动的安装介质。可以从官方构建自定义镜像 <a href="https://github.com/void-linux/void-mklive">void-mklive</a> 提供命令行选项 <code>-p zfs</code> 到 <code>mklive.sh</code> 脚本。对于 <code>x86_64</code> 系统来说，获取一个预先构建的 <a href="https://github.com/leahneukirchen/hrmpf/releases">hrmpf</a> 镜像可能更方便。这些镜像由 Void 团队成员维护，是标准 Void Live 镜像的扩展，包括预编译的ZFS模块和其他有用的工具。</p>
+<h3 id="磁盘分区"><a class="header" href="#磁盘分区">磁盘分区</a></h3>
+<p>在启动一个支持ZFS的实时镜像后，对你的<a href="../live-images/partitions.html">磁盘进行分区</a>。分区指南中的注意事项也适用于ZFS安装，除了</p>
+<ul>
+<li>
+<p>引导分区应该被认为是必要的，除非你打算使用 <code>gummiboot</code>，它期望您的 EFI 系统分区将安装在 <code>/boot</code>. （这里不讨论这种替代配置。）</p>
+</li>
+<li>
+<p>除了任何 EFI 系统分区、GRUB BIOS 启动分区、swap 分区或启动分区之外，磁盘的其余部分通常应该是一个类型代码为BF00 的单一分区，该分区将专门用于一个 ZFS 池。在单个磁盘上创建单独的 ZFS 池没有任何好处。</p>
+</li>
+</ul>
+<p>根据需要，使用格式化 EFI 系统分区 <a href="https://man.voidlinux.org/mkfs.vfat.8">mkfs.vfat(8)</a> 和引导分区 使用 <a href="https://man.voidlinux.org/mke2fs.8">mke2fs(8)</a> 或 <a href="https://man.voidlinux.org/mkfs.xfs.8">mkfs.xfs(8)</a> 。 初始化任何 swap 空间 使用 <a href="https://man.voidlinux.org">mkswap(8)</a> 。 </p>
+<blockquote>
+<p>可以将 Linux 交换空间放在 ZFS zvol 上,尽管在高内存压力下可能会有内核锁死的风险。 本指南 在 zvol 上的交换空间问题上不采取任何立场。 然而，如果你想使用悬浮到磁盘（休眠），注意内核不能从存储在zvol上的内存镜像中恢复。 你需要一个专门的交换分区来使用休眠。除了这个注意事项之外，在使用ZFS根目录时，恢复一个暂停的映像不需要特别的考虑。</p>
+</blockquote>
+<h3 id="创建-zfs-池"><a class="header" href="#创建-zfs-池">创建 ZFS 池</a></h3>
+<p>使用 <a href="https://man.voidlinux.org/zpool.8">zpool(8)</a> 在为其创建的分区上创建一个 ZFS 池 <code>/dev/disk/by-id/wwn-0x5000c500deadbeef-part3</code>:</p>
+<pre><code># zpool create -f -o ashift=12 \
+    -O compression=lz4 \
+    -O acltype=posixacl \
+    -O xattr=sa \
+    -O relatime=on \
+    -o autotrim=on \
+    -m none zroot /dev/disk/by-id/wwn-0x5000c500deadbeef-part3
+</code></pre>
+<p>根据需要调整池（<code>-o</code>）和文件系统（<code>-O</code>）选项，并将分区标识符 <code>wwn-0x5000c500deadbeef-part3</code> 替换为要使用的实际分区的标识符。</p>
+<blockquote>
+<p>当添加磁盘或分区到 ZFS 池时，一般来说，最好通过在 <code>/dev/disk/by-id</code> 或（在UEFI系统上）<code>/dev/disk/by-partuuid</code> 中创建的符号链接来引用它们。这样，即使磁盘命名在某个时候发生变化，ZFS也会识别正确的分区。使用传统的设备节点如 <code>/dev/sda3</code> 可能会导致间歇性的导入失败。</p>
+</blockquote>
+<p>接下来，用一个临时的、备用的根路径导出并重新导入池子:</p>
+<pre><code># zpool export zroot
+# zpool import -N -R /mnt zroot
+</code></pre>
+<h3 id="创建初始文件系统"><a class="header" href="#创建初始文件系统">创建初始文件系统</a></h3>
+<p>ZFS 池上的文件系统布局是灵活的。 但是，通常将操作系统根文件系统（“引导环境”）置于 ROOT 父级下：</p>
+<pre><code># zfs create -o mountpoint=none zroot/ROOT
+# zfs create -o mountpoint=/ -o canmount=noauto zroot/ROOT/void
+</code></pre>
+<p>在 <code>mountpoint=/</code> 的文件系统上设置 <code>canmount=noauto</code> 是非常有用的，因为它允许创建多个启动环境（这些环境可能是普通 Void 安装的克隆，也可能包含完全独立的发行版），而不用担心ZFS自动挂载会试图挂载一个而不是另一个。</p>
+<p>为了将用户数据与操作系统分开，创建一个文件系统来存储主目录:</p>
+<pre><code># zfs create -o mountpoint=/home zroot/home
+</code></pre>
+<p>可以根据需要创建其他文件系统</p>
+<h3 id="挂载-zfs-层次结构"><a class="header" href="#挂载-zfs-层次结构">挂载 ZFS 层次结构</a></h3>
+<p>所有的 ZFS 文件系统都应该安装在先前重新导入时建立的 <code>/mnt</code> 备用根目录下。在允许 ZFS 自动挂载其他所有的文件系统之前，先挂载纯手动的根文件系统：</p>
+<pre><code># zfs mount zroot/ROOT/void
+# zfs mount -a
+</code></pre>
+<p>在这一点上，整个 ZFS 层次结构应该被挂载并准备好安装。为了提高启动时的导入速度，在一个缓存文件中记录当前的池子配置是很有用的，Void 将使用这个文件来避免走遍整个设备层次结构来识别可导入的池子:</p>
+<pre><code># mkdir -p /mnt/etc/zfs
+# zpool set cachefile=/mnt/etc/zfs/zpool.cache zroot
+</code></pre>
+<p>在适当的地方挂载非 ZFS 文件系统。例如，如果 <code>/dev/sda2</code> 持有一个 ext4 文件系统，应该被挂载在<code>/boot</code>，而<code>/dev/sda1</code> 是 EFI 系统分区:</p>
+<pre><code># mkdir -p /mnt/boot
+# mount /dev/sda2 /mnt/boot
+# mkdir -p /mnt/boot/efi
+# mount /dev/sda1 /mnnt/boot/efi
+</code></pre>
+<h3 id="安装"><a class="header" href="#安装">安装</a></h3>
+<p>在这一点上，普通的安装可以从标准 chroot 安装指南的 <a href="https://docs.voidlinux.org/installation/guides/chroot.html#base-installation">&quot;Base Installation&quot;
+section</a> 部分进行。然而，在按照 <a href="https://docs.voidlinux.org/installation/guides/chroot.html#finalization">&quot;Finalization&quot; instructions</a> 的说明进行安装之前，要确保已经安装了zfs包，并且dracut被配置可以识别ZFS根文件系统：</p>
+<pre><code>[xchroot /mnt] # mkdir -p /etc/dracut.conf.d
+[xchroot /mnt] # cat &gt; /etc/dracut.conf.d/zol.conf &lt;&lt;EOF
+nofsck=&quot;yes&quot;
+add_dracutmodules+=&quot; zfs &quot;
+omit_dracutmodules+=&quot; btrfs resume &quot;
+EOF
+[xchroot /mnt] # xbps-install zfs
+</code></pre>
+<p>最后，按照 &quot;Finalization&quot; instructions 并重新启动进入您的新系统。</p>
+
+				</main>
+
+				<nav id="nav-wide-wrapper" aria-label="Page navigation">
+						<a href="../../installation/guides/fde.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+								<path d="M4 10l9 9 1.4-1.5L7 10l7.4-7.5L13 1z"/>
+							</svg>
+						</a>
+
+						<a href="../../installation/guides/arm-devices/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+								<path d="M7 1L5.6 2.5 13 10l-7.4 7.5L7 19l9-9z"/>
+							</svg>
+						</a>
+				</nav>
+			</div>
+		</div>
+
+
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+    </body>
+</html>

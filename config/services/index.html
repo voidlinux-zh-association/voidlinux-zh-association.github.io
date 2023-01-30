@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="utf-8">
+        <title>服务与守护进程 - runit - Void Linux Handbook</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+        </script>
+		<!-- Work around some values being stored in localStorage wrapped in quotes -->
+		<script type="text/javascript">
+			try {
+				var sidebar = localStorage.getItem('mdbook-sidebar');
+
+				if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+					localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+				}
+			} catch (e) { }
+		</script>
+
+		<header>
+			<nav id="void-nav">
+				<ul>
+					<li><a id="skip-to-content" tabindex="1" href="#main">Skip to content</a></li>
+					<li>
+						<button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+								<path d="M1 3v2h18V3zm0 8h18V9H1zm0 6h18v-2H1z"/>
+							</svg>
+						</button>
+					</li>
+					<li>
+						<button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+								<path d="M7.5 13c3.04 0 5.5-2.46 5.5-5.5S10.54 2 7.5 2 2 4.46 2 7.5 4.46 13 7.5 13zm4.55.46C10.79 14.43 9.21 15 7.5 15 3.36 15 0 11.64 0 7.5S3.36 0 7.5 0C11.64 0 15 3.36 15 7.5c0 1.71-.57 3.29-1.54 4.55l6.49 6.49-1.41 1.41-6.49-6.49z"/>
+							</svg>
+						</button>
+					</li>
+                                        <noscript>
+                                          <li class="js-unavailable">Search functionality requires JavaScript</li>
+                                        </noscript>
+				</ul>
+				<ul id="nav-right">
+					<li><a href="https://www.voidlinux.org">Home</a></li>
+					<li><a href="https://www.voidlinux.org/news/">News</a></li>
+					<li><a href="https://www.voidlinux.org/download/">Download</a></li>
+					<li><a href="https://www.voidlinux.org/packages/">Packages</a></li>
+					<li><a href="https://docs.voidlinux.org">Documentation</a></li>
+					<li><a href="https://man.voidlinux.org/">Manual Pages</a></li>
+					<li><a href="https://github.com/void-linux">GitHub</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<div id="content">
+
+			<!-- Hide / unhide sidebar before it is displayed -->
+			<script type="text/javascript">
+				var html = document.querySelector('html');
+				var sidebar = 'hidden';
+				if (document.body.clientWidth >= 1080) {
+					try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+					sidebar = sidebar || 'visible';
+				}
+				html.classList.remove('sidebar-visible');
+				html.classList.add("sidebar-" + sidebar);
+			</script>
+
+			<nav id="sidebar" aria-label="Table of contents">
+				<ol class="chapter"><li class="chapter-item expanded "><a href="../../about/index.html"><strong aria-hidden="true">1.</strong> 关于</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../about/history.html"><strong aria-hidden="true">1.1.</strong> 历史</a></li><li class="chapter-item expanded "><a href="../../about/about-this-handbook.html"><strong aria-hidden="true">1.2.</strong> 关于本手册</a></li><li class="chapter-item expanded "><a href="../../about/infradocs.html"><strong aria-hidden="true">1.3.</strong> InfraDocs</a></li></ol></li><li class="chapter-item expanded "><a href="../../installation/index.html"><strong aria-hidden="true">2.</strong> 安装</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../installation/live-images/index.html"><strong aria-hidden="true">2.1.</strong> Live 安装程序</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../installation/live-images/prep.html"><strong aria-hidden="true">2.1.1.</strong> 准备安装介质</a></li><li class="chapter-item expanded "><a href="../../installation/live-images/partitions.html"><strong aria-hidden="true">2.1.2.</strong> 分区说明</a></li><li class="chapter-item expanded "><a href="../../installation/live-images/guide.html"><strong aria-hidden="true">2.1.3.</strong> 安装指南</a></li></ol></li><li class="chapter-item expanded "><a href="../../installation/guides/index.html"><strong aria-hidden="true">2.2.</strong> 进阶安装指南</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../installation/guides/chroot.html"><strong aria-hidden="true">2.2.1.</strong> 通过 chroot 安装 (x86/x86_64/aarch64)</a></li><li class="chapter-item expanded "><a href="../../installation/guides/fde.html"><strong aria-hidden="true">2.2.2.</strong> 全盘加密</a></li><li class="chapter-item expanded "><a href="../../installation/guides/zfs.html"><strong aria-hidden="true">2.2.3.</strong> 全盘 ZFS</a></li><li class="chapter-item expanded "><a href="../../installation/guides/arm-devices/index.html"><strong aria-hidden="true">2.2.4.</strong> ARM 设备</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../installation/guides/arm-devices/platforms.html"><strong aria-hidden="true">2.2.4.1.</strong> 所支持的平台</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../installation/musl.html"><strong aria-hidden="true">2.3.</strong> musl</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/index.html"><strong aria-hidden="true">3.</strong> 配置</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/package-documentation/index.html"><strong aria-hidden="true">3.1.</strong> 软件文档</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/package-documentation/man.html"><strong aria-hidden="true">3.1.1.</strong> 手册页</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/firmware.html"><strong aria-hidden="true">3.2.</strong> 驱动</a></li><li class="chapter-item expanded "><a href="../../config/locales.html"><strong aria-hidden="true">3.3.</strong> 本地化与翻译</a></li><li class="chapter-item expanded "><a href="../../config/users-and-groups.html"><strong aria-hidden="true">3.4.</strong> 用户和用户组</a></li><li class="chapter-item expanded "><a href="../../config/services/index.html" class="active"><strong aria-hidden="true">3.5.</strong> 服务与守护进程 - runit</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/services/user-services.html"><strong aria-hidden="true">3.5.1.</strong> 每个用户的服务</a></li><li class="chapter-item expanded "><a href="../../config/services/logging.html"><strong aria-hidden="true">3.5.2.</strong> 日志</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/rc-files.html"><strong aria-hidden="true">3.6.</strong> rc.conf, rc.local 还有 rc.shutdown</a></li><li class="chapter-item expanded "><a href="../../config/cron.html"><strong aria-hidden="true">3.7.</strong> Cron</a></li><li class="chapter-item expanded "><a href="../../config/ssd.html"><strong aria-hidden="true">3.8.</strong> 固态硬盘</a></li><li class="chapter-item expanded "><a href="../../config/security/index.html"><strong aria-hidden="true">3.9.</strong> 安全</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/security/apparmor.html"><strong aria-hidden="true">3.9.1.</strong> AppArmor</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/date-time.html"><strong aria-hidden="true">3.10.</strong> 日期和时间</a></li><li class="chapter-item expanded "><a href="../../config/kernel.html"><strong aria-hidden="true">3.11.</strong> 内核</a></li><li class="chapter-item expanded "><a href="../../config/power-management.html"><strong aria-hidden="true">3.12.</strong> 电源管理</a></li><li class="chapter-item expanded "><a href="../../config/network/index.html"><strong aria-hidden="true">3.13.</strong> 网络</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/network/firewalls.html"><strong aria-hidden="true">3.13.1.</strong> 防火墙</a></li><li class="chapter-item expanded "><a href="../../config/network/wpa_supplicant.html"><strong aria-hidden="true">3.13.2.</strong> wpa_supplicant</a></li><li class="chapter-item expanded "><a href="../../config/network/iwd.html"><strong aria-hidden="true">3.13.3.</strong> IWD</a></li><li class="chapter-item expanded "><a href="../../config/network/networkmanager.html"><strong aria-hidden="true">3.13.4.</strong> NetworkManager</a></li><li class="chapter-item expanded "><a href="../../config/network/connman.html"><strong aria-hidden="true">3.13.5.</strong> ConnMan</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/network-filesystems.html"><strong aria-hidden="true">3.14.</strong> 网络文件系统</a></li><li class="chapter-item expanded "><a href="../../config/session-management.html"><strong aria-hidden="true">3.15.</strong> Session 和 Seat 管理</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/index.html"><strong aria-hidden="true">3.16.</strong> 图形 Session</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/graphical-session/graphics-drivers/index.html"><strong aria-hidden="true">3.16.1.</strong> 图形设备</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/graphical-session/graphics-drivers/amd.html"><strong aria-hidden="true">3.16.1.1.</strong> AMD or ATI</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/graphics-drivers/intel.html"><strong aria-hidden="true">3.16.1.2.</strong> Intel</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/graphics-drivers/nvidia.html"><strong aria-hidden="true">3.16.1.3.</strong> NVIDIA</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/graphics-drivers/optimus.html"><strong aria-hidden="true">3.16.1.4.</strong> NVIDIA Optimus</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/graphical-session/xorg.html"><strong aria-hidden="true">3.16.2.</strong> Xorg</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/wayland.html"><strong aria-hidden="true">3.16.3.</strong> Wayland</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/fonts.html"><strong aria-hidden="true">3.16.4.</strong> 字体</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/icons.html"><strong aria-hidden="true">3.16.5.</strong> 图标</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/gnome.html"><strong aria-hidden="true">3.16.6.</strong> GNOME</a></li><li class="chapter-item expanded "><a href="../../config/graphical-session/kde.html"><strong aria-hidden="true">3.16.7.</strong> KDE</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/media/index.html"><strong aria-hidden="true">3.17.</strong> 多媒体</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/media/alsa.html"><strong aria-hidden="true">3.17.1.</strong> ALSA</a></li><li class="chapter-item expanded "><a href="../../config/media/pipewire.html"><strong aria-hidden="true">3.17.2.</strong> PipeWire</a></li><li class="chapter-item expanded "><a href="../../config/media/pulseaudio.html"><strong aria-hidden="true">3.17.3.</strong> PulseAudio</a></li><li class="chapter-item expanded "><a href="../../config/media/sndio.html"><strong aria-hidden="true">3.17.4.</strong> sndio</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/bluetooth.html"><strong aria-hidden="true">3.18.</strong> 蓝牙</a></li><li class="chapter-item expanded "><a href="../../config/texlive.html"><strong aria-hidden="true">3.19.</strong> TeX Live</a></li><li class="chapter-item expanded "><a href="../../config/external-applications.html"><strong aria-hidden="true">3.20.</strong> 更多程序</a></li><li class="chapter-item expanded "><a href="../../config/print/index.html"><strong aria-hidden="true">3.21.</strong> 打印</a></li><li class="chapter-item expanded "><a href="../../config/containers-and-vms/index.html"><strong aria-hidden="true">3.22.</strong> 容器与虚拟化</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../config/containers-and-vms/chroot.html"><strong aria-hidden="true">3.22.1.</strong> Chroots and Containers</a></li><li class="chapter-item expanded "><a href="../../config/containers-and-vms/libvirt.html"><strong aria-hidden="true">3.22.2.</strong> libvirt</a></li><li class="chapter-item expanded "><a href="../../config/containers-and-vms/lxc.html"><strong aria-hidden="true">3.22.3.</strong> LXC</a></li></ol></li><li class="chapter-item expanded "><a href="../../config/openpgp.html"><strong aria-hidden="true">3.23.</strong> OpenPGP</a></li></ol></li><li class="chapter-item expanded "><a href="../../xbps/index.html"><strong aria-hidden="true">4.</strong> XBPS 软件管理器</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../xbps/advanced-usage.html"><strong aria-hidden="true">4.1.</strong> 高级用法</a></li><li class="chapter-item expanded "><a href="../../xbps/repositories/index.html"><strong aria-hidden="true">4.2.</strong> 软件源</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../xbps/repositories/mirrors/index.html"><strong aria-hidden="true">4.2.1.</strong> 镜像</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../xbps/repositories/mirrors/changing.html"><strong aria-hidden="true">4.2.1.1.</strong> 更换镜像</a></li><li class="chapter-item expanded "><a href="../../xbps/repositories/mirrors/tor.html"><strong aria-hidden="true">4.2.1.2.</strong> 使用 Tor 镜像</a></li></ol></li><li class="chapter-item expanded "><a href="../../xbps/repositories/restricted.html"><strong aria-hidden="true">4.2.2.</strong> 受限制的软件</a></li><li class="chapter-item expanded "><a href="../../xbps/repositories/custom.html"><strong aria-hidden="true">4.2.3.</strong> 自定义的软件源</a></li><li class="chapter-item expanded "><a href="../../xbps/repositories/signing.html"><strong aria-hidden="true">4.2.4.</strong> 签名软件源</a></li></ol></li><li class="chapter-item expanded "><a href="../../xbps/troubleshooting/index.html"><strong aria-hidden="true">4.3.</strong> XBPS 的故障排除</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../xbps/troubleshooting/common-issues.html"><strong aria-hidden="true">4.3.1.</strong> 常见问题</a></li><li class="chapter-item expanded "><a href="../../xbps/troubleshooting/static.html"><strong aria-hidden="true">4.3.2.</strong> Static XBPS</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../contributing/index.html"><strong aria-hidden="true">5.</strong> 贡献</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../contributing/void-docs/index.html"><strong aria-hidden="true">5.1.</strong> 贡献于 void-docs</a></li></ol></li></ol>
+			</nav>
+
+			<!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+			<script type="text/javascript">
+				document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+	document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+	Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+		link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+	});
+			</script>
+
+			<div id="page-wrapper">
+				<div id="search-wrapper" class="hidden">
+					<form id="searchbar-outer" class="searchbar-outer">
+						<input type="search" name="search" id="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+					</form>
+					<div id="searchresults-outer" class="searchresults-outer hidden">
+						<div id="searchresults-header" class="searchresults-header"></div>
+						<ul id="searchresults">
+						</ul>
+					</div>
+				</div>
+
+				<main id="main">
+					<h1 id="服务和守护进程---runit"><a class="header" href="#服务和守护进程---runit">服务和守护进程 - runit</a></h1>
+<p>Void 使用 <a href="https://man.voidlinux.org/runit.8">runit(8)</a> 监督组件来运行系统服务和守护程序。</p>
+<p>使用 runit 的一些优势包括：</p>
+<ul>
+<li>一个小的基础代码，可以更容易地审计错误和安全问题。 </li>
+<li>每个服务都被赋予一个干净的进程状态，无论该服务是如何启动或重启：它将以相同的环境、资源限制、开放的文件描述符和控制终端启动。</li>
+<li>可靠的服务日志记录工具，只要相关的服务在运行并写入日志，日志服务就会保持运行。</li>
+</ul>
+<p>如果你不需要一个程序持续运行，但希望它定期运行，你可以考虑使用 <a href="../cron.html">cron daemon</a></p>
+<h2 id="章节内容"><a class="header" href="#章节内容">章节内容</a></h2>
+<ul>
+<li><a href="./user-services.html">每个用户的服务</a></li>
+<li><a href="./logging.html">日志</a></li>
+</ul>
+<h2 id="服务目录"><a class="header" href="#服务目录">服务目录</a></h2>
+<p>每个由 runit 管理的服务都有一个相关的<em>服务目录</em>。</p>
+<p>一个服务目录只需要一个文件：一个名为 <code>run</code> 的可执行文件，这是希望在前台执行一个进程。</p>
+<p>可选的，一个服务目录可以包含：</p>
+<ul>
+<li>一个名为 <code>check</code> 的可执行文件，它将被运行以检查服务是否启动和可用；如果 <code>check</code> 退出时为0，则认为它是可用的。</li>
+<li>一个名为 <code>finish</code> 的可执行文件，它将在关机/进程停止时运行。</li>
+<li>一个 <code>conf</code> 文件；它可以包含环境变量，并在 <code>run</code> 被引用。</li>
+<li>一个名为的目录 <code>log</code>; pipe 将从 <code>run</code> 服务目录中的进程到输入的 <code>run</code> 过程中 <code>log</code> 目录。 </li>
+</ul>
+<p>当一个新的服务被创建时，在第一次运行时将会自动创建一个 <code>supervise</code> 文件夹。</p>
+<h3 id="配置服务"><a class="header" href="#配置服务">配置服务</a></h3>
+<p>大多数服务可以接受由服务目录中的 <code>conf</code> 文件设置的配置选项。这允许在不修改相关软件包提供的服务目录的情况下对服务进行定制。</p>
+<p>检查服务文件以了解如何传递配置参数。少数服务在其 <code>conf</code> 文件中有一个 <code>OPTS=&quot;--value ...&quot;</code> 这样的字段。</p>
+<p>要进行更复杂的定制，你应该<a href="#%E7%BC%96%E8%BE%91%E6%9C%8D%E5%8A%A1">编辑该服务</a>。</p>
+<h3 id="编辑服务"><a class="header" href="#编辑服务">编辑服务</a></h3>
+<p>要编辑一个服务，首先要将其服务目录复制到一个不同的目录名下。否则， <a href="https://man.voidlinux.org/xbps-install.1">xbps-install(1)</a> 会覆盖服务目录。然后，根据需要编辑新的服务文件。最后，旧的服务应该被停止和禁用，而新的服务应该被启动。</p>
+<h2 id="管理服务"><a class="header" href="#管理服务">管理服务</a></h2>
+<h3 id="runsvdirs"><a class="header" href="#runsvdirs">Runsvdirs</a></h3>
+<p><strong>runsvdir</strong> 是 <code>/etc/runit/runsvdir</code> 中的一个目录，它包含了以服务目录符号链接形式出现的启用的服务。在一个运行中的系统中，当前的 runsvdir 可以通过 <code>/var/service</code> 符号链接访问。</p>
+<p><code>runit-void</code> 软件包带有两个 <code>runtvdirs</code> ，<code>single</code>和 <code>default</code>:</p>
+<ul>
+<li>
+<p><code>single</code> 只是运行 <a href="https://man.voidlinux.org/sulogin.8">sulogin(8)</a>和 the
+necessary steps to rescue your system. </p>
+</li>
+<li>
+<p><code>default</code> 是运行系统的默认 runsvdir，除非[由内核命令行指定
+(#引导不同的 runsvdir)。</p>
+</li>
+</ul>
+<p>可以在 <code>/etc/runit/runsvdir/</code> 中创建额外的 runsvdirs.</p>
+<p>参见 <a href="https://man.voidlinux.org/runsvdir.8">runsvdir(8)</a> 和 <a href="https://man.voidlinux.org/runsvchdir.8">runsvchdir(8)</a> 以获得更多信息。 </p>
+<h4 id="引导不同的-runsvdir"><a class="header" href="#引导不同的-runsvdir">引导不同的 runsvdir</a></h4>
+<p>要启动 <code>default</code> 以外的 runsvdir，可以在<a href="../kernel.html#cmdline">内核 comand-line</a>中加入所需的 runsvdir 的名称。作为一个例子，在内核命令行中加入 <code>single</code> 将启动 <code>single runsvdir</code>。</p>
+<h3 id="基本用法"><a class="header" href="#基本用法">基本用法</a></h3>
+<p>启动、停止、重启和获取一个服务的状态。</p>
+<pre><code># sv up &lt;services&gt;
+# sv down &lt;services&gt;
+# sv restart &lt;services&gt;
+# sv status &lt;services&gt;
+</code></pre>
+<p><code>&lt;services&gt;</code> 占位符可以是:</p>
+<ul>
+<li><code>/var/service/</code> 目录内的服务名称（服务目录名称）。</li>
+<li>服务的完整路径。</li>
+</ul>
+<p>例如，下面的命令显示了一个特定服务和所有启用的服务的状态:</p>
+<pre><code># sv status dhcpcd
+# sv status /var/service/*
+</code></pre>
+<p>有关详细信息，请参阅 <a href="https://man.voidlinux.org/sv.8">sv(8)</a> </p>
+<h4 id="启用服务"><a class="header" href="#启用服务">启用服务</a></h4>
+<p>Void Linux 在 <code>/etc/sv/</code> 中为大多数守护程序提供了服务目录。</p>
+<p>要在一个已启动的系统上启用一个服务，在 <code>/var/service/</code> 中创建一个服务目录的符号链接:</p>
+<pre><code># ln -s /etc/sv/&lt;service&gt; /var/service/
+</code></pre>
+<p>如果系统目前没有运行，服务可以直接链接到 <code>default</code> 的 <a href="#runsvdirs">runsvdir</a>:</p>
+<pre><code># ln -s /etc/sv/&lt;service&gt; /etc/runit/runsvdir/default/
+</code></pre>
+<p>这将自动启动该服务。一旦一个服务被链接，它将总是在启动时启动，并在停止时重新启动，除非被管理员关闭。</p>
+<p>为了防止一个服务在启动时启动，同时允许 runit 管理它，在其服务目录下创建一个名为 <code>down</code> 的文件:</p>
+<pre><code># touch /etc/sv/&lt;service&gt;/down
+</code></pre>
+<p><code>down</code> 文件机制也使得禁用默认启用的服务成为可能，例如用于 ttys 1 到 6 的 <a href="https://man.voidlinux.org/agetty.8">agetty(8)</a> 服务。这样，影响这些服务的软件包更新（在这种情况下，<code>runit-void</code> 软件包）就不会重新启用它们。</p>
+<h4 id="禁用服务"><a class="header" href="#禁用服务">禁用服务</a></h4>
+<p>要禁用一个服务，从正在运行的 runsvdir 中删除符号链接:</p>
+<pre><code># rm /var/service/&lt;service&gt;
+</code></pre>
+<p>或者，例如，从 <code>default</code> 的runsvdir，如果特定的 runsvdir 或系统目前没有运行:</p>
+<pre><code># rm /etc/runit/runsvdir/default/&lt;service&gt;
+</code></pre>
+<h4 id="测试服务"><a class="header" href="#测试服务">测试服务</a></h4>
+<p>要检查一个服务在被服务监督员启动时是否正常工作，在完全启用它之前运行一次:</p>
+<pre><code># touch /etc/sv/&lt;service&gt;/down
+# ln -s /etc/sv/&lt;service&gt; /var/service/
+# sv once &lt;service&gt;
+</code></pre>
+<p>如果一切正常，删除 <code>down</code> 文件以启用服务。</p>
+
+				</main>
+
+				<nav id="nav-wide-wrapper" aria-label="Page navigation">
+						<a href="../../config/users-and-groups.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+								<path d="M4 10l9 9 1.4-1.5L7 10l7.4-7.5L13 1z"/>
+							</svg>
+						</a>
+
+						<a href="../../config/services/user-services.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+								<path d="M7 1L5.6 2.5 13 10l-7.4 7.5L7 19l9-9z"/>
+							</svg>
+						</a>
+				</nav>
+			</div>
+		</div>
+
+
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+    </body>
+</html>
