@@ -104,6 +104,10 @@
 				<main id="main">
 					<h1 id="更换镜像"><a class="header" href="#更换镜像">更换镜像</a></h1>
 <p>每个软件库都有一个文件定义了所使用的镜像的 URL 。对于官方软件库，这些文件由软件包管理器安装在 <code>/usr/share/xbps.d</code> 中，但如果在 <code>/etc/xbps.d</code> 中发现重复的文件，就会使用这些值来代替。</p>
+<h2 id="xmirror"><a class="header" href="#xmirror">xmirror</a></h2>
+<p>为了方便修改当前选择的镜像，可以使用 <a href="https://man.voidlinux.org/xmirror.1">xmirror(1)</a>（来自 <code>xmirror</code> 软件包）。这个工具会处理所有更新所选镜像的步骤。</p>
+<h2 id="手动方式"><a class="header" href="#手动方式">手动方式</a></h2>
+<p>另外，这也可以手动完成：</p>
 <p>为了干净利落地修改镜像URL，把所有版本库的配置文件复制到 <code>/etc/xbps.d</code>，并修改每个复制的版本库文件中的 URL。</p>
 <pre><code># mkdir -p /etc/xbps.d
 # cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
