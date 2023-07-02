@@ -113,33 +113,21 @@
 </code></pre>
 <h2 id="session-管理"><a class="header" href="#session-管理">Session 管理</a></h2>
 <p>在 PipeWire 中，会话管理器承担了媒体源的互连以及执行路由策略的责任。没有 Session 管理器，PipeWire 将无法运行。参考 <a href="https://gitlab.freedesktop.org/pipewire/media-session"><code>pipewire-media-session</code></a> 最初在 Void <code>pipewire</code> 包中提供，并配置为默认运行以满足这一要求。然而，<code>pipewire-media-session</code> 已被废弃，作者建议使用 <a href="https://pipewire.pages.freedesktop.org/wireplumber/">WirePlumber</a> 代替它。安装 <code>wireplumber</code> 软件包，以便在 PipeWire 中使用这个 session 管理器。</p>
-<p>标准的 Void 配置会使 <code>pipewire</code> 自动启动 <code>pipewire-media-session</code>，必须重写以使用 <code>wireplumber</code>。唯一需要改变的是，在 <code>context.exec</code> 部分注释掉 <code>pipewire-media-session</code> 的调用，这可以通过一个 <code>sed</code> 的替换来完成。为了使所有用户都能看到这一配置变化，将新的配置文件放在 <code>/etc/pipewire</code> 中：</p>
-<pre><code># mkdir -p /etc/pipewire
-# sed '/path.*=.*pipewire-media-session/s/{/#{/' \
-    /usr/share/pipewire/pipewire.conf &gt; /etc/pipewire/pipewire.conf
-</code></pre>
-<p>或者，将新的配置文件放置在单个用户的预期位置：</p>
-<pre><code>$ : &quot;${XDG_CONFIG_HOME:=${HOME}/.config}&quot;
-$ mkdir -p &quot;${XDG_CONFIG_HOME}/pipewire&quot;
-$ sed '/path.*=.*pipewire-media-session/s/{/#{/' \
-    /usr/share/pipewire/pipewire.conf &gt; &quot;${XDG_CONFIG_HOME}/pipewire/pipewire.conf&quot;
-</code></pre>
 <blockquote>
-<p>在 <code>/etc/pipewire</code> 或 <code>${XDG_CONFIG_HOME}/pipewire</code> 中的自定义 <code>pipewire.conf</code> 将完全阻止使用默认的系统配置。鼓励覆盖默认配置以启用 <code>wireplumber</code> 的用户监控默认配置，并在每次 <code>pipewire</code> 更新时核对任何变化。</p>
+<p>如果您安装了早期版本的 Void <code>pipewire</code> 封装，确保更新您的系统以消除任何陈旧的系统配置可能会尝试启动 <code>pipewire-media-session</code>。 之前覆盖的用户要使用的系统配置 <code>wireplumber</code>， 例如,通过放置自定义 <code>pipewire.conf</code> 文件输入 <code>/etc/pipewire</code> 或者 <code>${XDG_CONFIG_HOME}/pipewire</code>， 可能希望将这些覆盖与 <code>/usr/share/pipewire/pipewire.conf</code> 由最新安装的 <code>pipewire</code> 包裹。 如果想禁用之前的覆盖 <code>pipewire-media-session</code>，删除自定义配置可能就足够了。</p>
 </blockquote>
-<p>现在，配置 <code>wireplumber</code>，使之与 <code>pipewire</code> 同时启动。如果你的窗口管理器或桌面环境的自动启动机制是用来启动<code>pipewire</code> 的，建议使用同样的机制来启动 <code>wireplumber</code>。<code>wireplumber</code> 软件包包括一个<code>wireplumber.desktop</code> Desktop Entry 文件，在这种情况下可能有用。</p>
+<p>有几种方法可以同时启动 <code>wireplumber</code> 和 <code>pipewire</code>。如果你的窗口管理器或桌面环境的自动启动机制被用来启动 <code>pipewire</code>，建议使用相同的机制来启动<code>wireplumber</code>。<code>wireplumber</code> 软件包包括一个 <code>wireplumber.desktop</code> 桌面文件，在这种情况下可能很有用。</p>
 <blockquote>
 <p>请注意，<code>wireplumber</code> 必须在 <code>pipewire</code> 可执行文件之后启动。桌面应用程序自动启动规范没有规定通过桌面入口文件启动的服务的顺序。当依靠这些文件来启动 <code>pipewire</code> 和 <code>wireplumber</code> 时，请查阅你的窗口管理器或桌面环境的文档，以确定是否可以实现服务的正确排序。</p>
 </blockquote>
-<p>如果对独立的 <code>pipewire</code> 和 <code>wireplumber</code> 服务进行适当的排序是不可行的，可以配置 <code>pipewire</code> 来直接启动会话管理器。这可以通过运行:</p>
+<p>如果对独立的 <code>pipewire</code> 和 <code>wireplumber</code> 服务进行适当排序是不可行的，可以配置 <code>pipewire</code> 来直接启动会话管理器。这可以通过运行</p>
 <pre><code># mkdir -p /etc/pipewire/pipewire.conf.d
-# echo 'context.exec = [ { path = &quot;/usr/bin/wireplumber&quot; args = &quot;&quot; } ]' \
-    &gt; /etc/pipewire/pipewire.conf.d/10-wireplumber.conf
+# ln -s /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
 </code></pre>
-<p>系统配置，或对于每个用户的配置，运行</p>
-<pre><code>$ mkdir -p &quot;${XDG_CONFIG_HOME}/pipewire/pipewire.conf.d
-$ echo 'context.exec = [ { path = &quot;/usr/bin/wireplumber&quot; args = &quot;&quot; } ]' \
-    &gt; &quot;${XDG_CONFIG_HOME}/pipewire/pipewire.conf.d/10-wireplumber.conf&quot;
+<p>系统配置，或者，对于每个用户的配置，运行</p>
+<pre><code>$ true &quot;${XDG_CONFIG_HOME:=${HOME}/.config}&quot;
+$ mkdir -p &quot;${XDG_CONFIG_HOME}/pipewire/pipewire.conf.d&quot;
+# ln -s /usr/share/examples/wireplumber/10-wireplumber.conf &quot;${XDG_CONFIG_HOME}/pipewire/pipewire.conf.d/&quot;
 </code></pre>
 <p>在这些配置中，启动 <code>pipewire</code> 应该足以建立一个使用 <code>wireplumber</code> 进行会话管理的工作的 PipeWire session。</p>
 <p>在其默认配置中，WirePlumber 需要一个活跃的 D-Bus 会话。如果你的桌面环境或窗口管理器被配置为提供 D-Bus 会话以及启动 <code>pipewire</code> 和 <code>wireplumber</code>，则不需要进一步配置。希望单独启动 <code>pipewire</code> 的用户，例如在<code>.xinitrc</code> 脚本中，可能会发现有必要配置 <code>pipewire</code> 来直接启动 <code>wireplumber</code>，并将 <code>pipewire</code> 的调用包装为</p>
@@ -157,7 +145,7 @@ Server Name: PulseAudio (on PipeWire 0.3.18)
 </code></pre>
 <p>一旦你确认 <code>pipewire-pulse</code> 如预期般工作，建议在启动 PipeWire 的地方自动启动它。可以修改 <a href="https://man.voidlinux.org/pipewire.conf.5">pipewire.conf(5)</a> 来自动启动 PulseAudio 服务器，但不建议保持 PipeWire 配置文件不被修改，以便将来更顺利地升级。</p>
 <h2 id="蓝牙音频"><a class="header" href="#蓝牙音频">蓝牙音频</a></h2>
-<p>为了使蓝牙音频工作，请安装 <code>libspa-Bluetooth</code> 软件包。</p>
+<p>为了使蓝牙音频工作，请安装 <code>libspa-bluetooth</code> 软件包。</p>
 <h2 id="alsa-集成"><a class="header" href="#alsa-集成">ALSA 集成</a></h2>
 <p>安装 <code>alsa-pipewire</code> ，然后启用 PipeWire ALSA 设备并使其成为默认设备:</p>
 <pre><code># mkdir -p /etc/alsa/conf.d

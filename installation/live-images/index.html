@@ -115,7 +115,7 @@
 <ul>
 <li><strong>窗口管理器:</strong> xfwm4</li>
 <li><strong>文件管理器:</strong> Thunar</li>
-<li><strong>Web 浏览器:</strong> Firefox ESR</li>
+<li><strong>Web 浏览器:</strong> Firefox</li>
 <li><strong>终端:</strong> xfce4-terminal</li>
 <li><strong>文本编辑器:</strong> Mousepad</li>
 <li><strong>图片查看器:</strong> Ristretto</li>
@@ -123,6 +123,13 @@
 Media Player, Audio Mixer, MIME type editor, Application finder</li>
 </ul>
 <p>xfce 映像的安装过程与 base 映像基本相同，除了在安装时你必须选择 <code>Local</code> 作为软件源。 若你选择了 <code>Network</code> 源，安装程序将下载并安装最新版本的 base 系统，live 镜像中将不包含任何其他软件包。</p>
+<h2 id="无障碍支持"><a class="header" href="#无障碍支持">无障碍支持</a></h2>
+<p>所有的Void安装程序图像都支持控制台的屏幕阅读器 <a href="https://man.voidlinux.org/espeakup.8">espeakup</a> 还有控制台盲文显示驱动 <a href="https://man.voidlinux.org/brltty.1">brltty</a>。这些服务可以在启动时通过按启动程序菜单中的 <code>s</code> 来启用无障碍支持。在基于 UEFI 的系统上，GRUB 是引导程序，当菜单可用时，它将播放双音鸣叫。在基于 BIOS 的系统和传统/兼容模式的 UEFI 系统上，SYSLINUX 是引导程序，不播放钟声。SYSLINUX 还需要在按下 <code>s</code> 后按下回车键。热键 <code>r</code> 也会在支持无障碍的情况下启动，但会将实时 ISO 加载到 RAM 中。</p>
+<p>在启动到激活了无障碍支持的安装程序镜像后，如果检测到有多个声卡，一个简短的音频菜单允许选择用于屏幕阅读器的声卡。当听到所需声卡的提示音时，按回车键来选择它。</p>
+<p>如果在安装程序中选择了 <code>Local</code> 安装源，<code>espeakup</code> 和 <code>brltty</code> 也将被安装，并且如果在 Live 环境中启用，也将在安装的系统上启用。</p>
+<p>xfce 安装镜像也支持图形化的读屏器 <code>orca</code> 。这可以通过按 <code>Win + R</code> 并输入 <code>orca -r</code> 来启用。如果选择了 <code>Local</code> 安装源，Orca 也将在安装到系统上。</p>
+<h2 id="内核-command-line-参数"><a class="header" href="#内核-command-line-参数">内核 Command-line 参数</a></h2>
+<p>Void 安装程序镜像支持几个内核 command-line 参数，这些参数可以改变 Live 系统的行为。参见<a href="https://github.com/void-linux/void-mklive#kernel-command-line-parameters">the void-mklive README for a full list</a> 。</p>
 
 				</main>
 

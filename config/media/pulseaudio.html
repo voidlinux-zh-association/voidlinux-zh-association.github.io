@@ -105,7 +105,7 @@
 					<h1 id="pulseaudio"><a class="header" href="#pulseaudio">PulseAudio</a></h1>
 <p>根据您使用的应用程序,您可能需要为 PulseAudio 提供 D-BUS session bus（例如通过 dbus-run-session）或 D-BUS system bus（通过 dbus 服务）。</p>
 <p>对于直接使用 ALSA 而不支持 PulseAudio 的应用程序， <code>alsa-plugins-pulseaudio</code> 包可以使它们通过 ALSA 使用 PulseAudio。</p>
-<p>PulseAudio 软件包带有服务文件，这在大多数设置中是不必要的,PulseAudio维护者<a href="https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SystemWide/">不鼓励</a>使用全系统的设置。相反，PulseAudio 会在需要时自动启动。如果它没有自动启动，可以通过在终端调用 <a href="https://man.voidlinux.org/pulseaudio.1">pulseaudio(1)</a> 来手动启动它，方法如下。</p>
+<p>PulseAudio 会在需要时自动启动。如果它没有自动启动，可以通过从终端调用 <a href="https://man.voidlinux.org/pulseaudio.1">pulseaudio(1)</a> 来手动启动它，方法如下：</p>
 <pre><code>$ pulseaudio --daemonize=no --exit-idle-time=-1
 </code></pre>
 <p>另一方面，PulseAudio 也可能在不需要的时候被自动激活。为了进展这种行为，可以将 <a href="https://man.voidlinux.org/pulse-client.conf.5">pulse-client.conf(5)</a> 中的 <code>autospawn</code> 指令设置为 <code>no</code>。</p>

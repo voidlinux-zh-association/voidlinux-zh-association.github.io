@@ -113,6 +113,8 @@
 <p><code>vkpurge</code> 预先安装在每个 Void Linux 系统上，删除旧内核是通过 <a href="https://man.voidlinux.org/vkpurge.8">vkpurge(8)</a> 工具完成的。这个工具在移除旧内核时运行必要的 hooks。注意，<code>vkpurge</code> 不会删除内核 <em>软件包</em>，只删除特定的 <em>内核</em>。</p>
 <h2 id="移除默认的内核系列"><a class="header" href="#移除默认的内核系列">移除默认的内核系列</a></h2>
 <p>如果你已经安装了默认之外的系列内核包，并且想移除默认的内核包，你应该安装 <code>linux-base</code> 包，或者在已经安装的情况下将其<a href="https://man.voidlinux.org/xbps-pkgdb.1">标记为手动软件包</a>。在这个过程之后，你可以用 <a href="https://man.voidlinux.org/xbps-remove.1">xbps-remove(1)</a> 删除默认的内核包。可能有必要在 <a href="https://man.voidlinux.org/xbps.d.5">xbps.d(5)</a> 中的 <code>ignorepkg</code> 条目中加入 <code>linux</code> 和 <code>linux-headers</code>，因为基础包可能依赖于它们。</p>
+<h2 id="换成其他内核系列"><a class="header" href="#换成其他内核系列">换成其他内核系列</a></h2>
+<p>如果你想使用 <code>linux-lts</code> 或 <code>linux-mainline</code> 内核系列而不是默认的 <code>linux</code>，首先安装所需的系列元包（及 <code>linux-lts-headers</code> 或<code>linux-mainline-headers</code> 元包）。然后，你可以将 <code>linux</code> 和 <code>linux-headers</code> 添加到 <a href="https://man.voidlinux.org/xbps.d.5">xbps.d(5)</a> 中的 <code>ignorepkg</code> 条目中，并卸载这些包。</p>
 <h2 id="改变默认的-initramfs-生成器"><a class="header" href="#改变默认的-initramfs-生成器">改变默认的 initramfs 生成器</a></h2>
 <p>默认情况下，Void Linux 使用 <a href="https://man.voidlinux.org/dracut.8">dracut</a> 为安装的内核准备 initramfs 镜像。替代品如 <a href="https://man.voidlinux.org/mkinitcpio.8">mkinitcpio</a> 是可用的。每个 initramfs 生成器都在 initramfs 组中注册了一个 <a href="https://man.voidlinux.org/xbps-alternatives.1">XBPS alternative</a> ，以链接其<a href="#%E5%86%85%E6%A0%B8-hooks">内核 hooks</a>，在为特定内核创建或移除 initramfs 镜像时使用。</p>
 <p>要用 mkinitcpio <em>等等</em> 替换 dracut，请安装 <code>mkinitcpio</code> 软件包；确认 <code>mkinitcpio</code> 出现在可用的替代品列表中，方法是运行:</p>

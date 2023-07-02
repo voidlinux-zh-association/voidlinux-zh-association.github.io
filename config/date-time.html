@@ -108,6 +108,10 @@
 <p>系统默认的时区可以通过将时区文件链接到 <code>/etc/localtime</code> :</p>
 <pre><code># ln -sf /usr/share/zoneinfo/&lt;timezone&gt; /etc/localtime
 </code></pre>
+<blockquote>
+<p>注意: 如果在 <code>/etc/rc.conf</code>　中设置了　<code>TIMEZONE</code> 变量, 应该将其删除或注释掉。因为这将覆盖在 <code>ln</code> 中设置的内容。
+然后重启.</p>
+</blockquote>
 <p>要在每个用户的基础上改变时区，可以从你的 shell 的配置文件中导出 <code>TZ</code> 变量。</p>
 <pre><code>export TZ=&lt;timezone&gt;
 </code></pre>

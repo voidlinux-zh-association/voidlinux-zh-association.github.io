@@ -227,7 +227,7 @@ SHA256 (void-live-x86_64-20210930.iso) = 45b75651eb369484e1e63ba803a34e9fe8a13b2
 <ul>
 <li><strong>窗口管理器:</strong> xfwm4</li>
 <li><strong>文件管理器:</strong> Thunar</li>
-<li><strong>Web 浏览器:</strong> Firefox ESR</li>
+<li><strong>Web 浏览器:</strong> Firefox</li>
 <li><strong>终端:</strong> xfce4-terminal</li>
 <li><strong>文本编辑器:</strong> Mousepad</li>
 <li><strong>图片查看器:</strong> Ristretto</li>
@@ -235,6 +235,13 @@ SHA256 (void-live-x86_64-20210930.iso) = 45b75651eb369484e1e63ba803a34e9fe8a13b2
 Media Player, Audio Mixer, MIME type editor, Application finder</li>
 </ul>
 <p>xfce 映像的安装过程与 base 映像基本相同，除了在安装时你必须选择 <code>Local</code> 作为软件源。 若你选择了 <code>Network</code> 源，安装程序将下载并安装最新版本的 base 系统，live 镜像中将不包含任何其他软件包。</p>
+<h2 id="无障碍支持"><a class="header" href="#无障碍支持">无障碍支持</a></h2>
+<p>所有的Void安装程序图像都支持控制台的屏幕阅读器 <a href="https://man.voidlinux.org/espeakup.8">espeakup</a> 还有控制台盲文显示驱动 <a href="https://man.voidlinux.org/brltty.1">brltty</a>。这些服务可以在启动时通过按启动程序菜单中的 <code>s</code> 来启用无障碍支持。在基于 UEFI 的系统上，GRUB 是引导程序，当菜单可用时，它将播放双音鸣叫。在基于 BIOS 的系统和传统/兼容模式的 UEFI 系统上，SYSLINUX 是引导程序，不播放钟声。SYSLINUX 还需要在按下 <code>s</code> 后按下回车键。热键 <code>r</code> 也会在支持无障碍的情况下启动，但会将实时 ISO 加载到 RAM 中。</p>
+<p>在启动到激活了无障碍支持的安装程序镜像后，如果检测到有多个声卡，一个简短的音频菜单允许选择用于屏幕阅读器的声卡。当听到所需声卡的提示音时，按回车键来选择它。</p>
+<p>如果在安装程序中选择了 <code>Local</code> 安装源，<code>espeakup</code> 和 <code>brltty</code> 也将被安装，并且如果在 Live 环境中启用，也将在安装的系统上启用。</p>
+<p>xfce 安装镜像也支持图形化的读屏器 <code>orca</code> 。这可以通过按 <code>Win + R</code> 并输入 <code>orca -r</code> 来启用。如果选择了 <code>Local</code> 安装源，Orca 也将在安装到系统上。</p>
+<h2 id="内核-command-line-参数"><a class="header" href="#内核-command-line-参数">内核 Command-line 参数</a></h2>
+<p>Void 安装程序镜像支持几个内核 command-line 参数，这些参数可以改变 Live 系统的行为。参见<a href="https://github.com/void-linux/void-mklive#kernel-command-line-parameters">the void-mklive README for a full list</a> 。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="准备安装介质"><a class="header" href="#准备安装介质">准备安装介质</a></h1>
 <p><a href="installation/live-images/../index.html#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E9%95%9C%E5%83%8F">下载安装镜像</a>后，必须将镜像写入可引导的媒介，比如 U 盘、SD 卡或者 CD/DVD。</p>
 <h2 id="在-linux-上创建可引导-u-盘或-sd-卡"><a class="header" href="#在-linux-上创建可引导-u-盘或-sd-卡">在 Linux 上创建可引导 U 盘或 SD 卡</a></h2>
@@ -1192,6 +1199,10 @@ zpool trim yourpoolname
 <p>系统默认的时区可以通过将时区文件链接到 <code>/etc/localtime</code> :</p>
 <pre><code># ln -sf /usr/share/zoneinfo/&lt;timezone&gt; /etc/localtime
 </code></pre>
+<blockquote>
+<p>注意: 如果在 <code>/etc/rc.conf</code>　中设置了　<code>TIMEZONE</code> 变量, 应该将其删除或注释掉。因为这将覆盖在 <code>ln</code> 中设置的内容。
+然后重启.</p>
+</blockquote>
 <p>要在每个用户的基础上改变时区，可以从你的 shell 的配置文件中导出 <code>TZ</code> 变量。</p>
 <pre><code>export TZ=&lt;timezone&gt;
 </code></pre>
@@ -1228,6 +1239,8 @@ zpool trim yourpoolname
 <p><code>vkpurge</code> 预先安装在每个 Void Linux 系统上，删除旧内核是通过 <a href="https://man.voidlinux.org/vkpurge.8">vkpurge(8)</a> 工具完成的。这个工具在移除旧内核时运行必要的 hooks。注意，<code>vkpurge</code> 不会删除内核 <em>软件包</em>，只删除特定的 <em>内核</em>。</p>
 <h2 id="移除默认的内核系列"><a class="header" href="#移除默认的内核系列">移除默认的内核系列</a></h2>
 <p>如果你已经安装了默认之外的系列内核包，并且想移除默认的内核包，你应该安装 <code>linux-base</code> 包，或者在已经安装的情况下将其<a href="https://man.voidlinux.org/xbps-pkgdb.1">标记为手动软件包</a>。在这个过程之后，你可以用 <a href="https://man.voidlinux.org/xbps-remove.1">xbps-remove(1)</a> 删除默认的内核包。可能有必要在 <a href="https://man.voidlinux.org/xbps.d.5">xbps.d(5)</a> 中的 <code>ignorepkg</code> 条目中加入 <code>linux</code> 和 <code>linux-headers</code>，因为基础包可能依赖于它们。</p>
+<h2 id="换成其他内核系列"><a class="header" href="#换成其他内核系列">换成其他内核系列</a></h2>
+<p>如果你想使用 <code>linux-lts</code> 或 <code>linux-mainline</code> 内核系列而不是默认的 <code>linux</code>，首先安装所需的系列元包（及 <code>linux-lts-headers</code> 或<code>linux-mainline-headers</code> 元包）。然后，你可以将 <code>linux</code> 和 <code>linux-headers</code> 添加到 <a href="https://man.voidlinux.org/xbps.d.5">xbps.d(5)</a> 中的 <code>ignorepkg</code> 条目中，并卸载这些包。</p>
 <h2 id="改变默认的-initramfs-生成器"><a class="header" href="#改变默认的-initramfs-生成器">改变默认的 initramfs 生成器</a></h2>
 <p>默认情况下，Void Linux 使用 <a href="https://man.voidlinux.org/dracut.8">dracut</a> 为安装的内核准备 initramfs 镜像。替代品如 <a href="https://man.voidlinux.org/mkinitcpio.8">mkinitcpio</a> 是可用的。每个 initramfs 生成器都在 initramfs 组中注册了一个 <a href="https://man.voidlinux.org/xbps-alternatives.1">XBPS alternative</a> ，以链接其<a href="config/kernel.html#%E5%86%85%E6%A0%B8-hooks">内核 hooks</a>，在为特定内核创建或移除 initramfs 镜像时使用。</p>
 <p>要用 mkinitcpio <em>等等</em> 替换 dracut，请安装 <code>mkinitcpio</code> 软件包；确认 <code>mkinitcpio</code> 出现在可用的替代品列表中，方法是运行:</p>
@@ -1575,7 +1588,7 @@ Passphrase=&lt;password&gt;
 </tbody></table>
 </div>
 <h2 id="故障排除-1"><a class="header" href="#故障排除-1">故障排除</a></h2>
-<p>Void 打包的内核被配置为 <code>CONFIG_INTEL_IOMMU_DEFAULT_ON=y</code>，这可能导致其图形驱动的问题，正如<a href="https://www.kernel.org/doc/html/latest/x86/intel-iommu.html#graphics-problems">内核文档</a>所报告的。为了解决这个问题，有必要禁用集成 GPU 的 IOMMU。这可以通过在你的<a href="config/graphical-session/graphics-drivers/../../kernel.html#cmdline">内核 cmdline</a> 中添加 <code>intel_iommu=igfx_off</code>来完成。这个问题预计会发生在 Broadwell 一代的内部 GPU 上。如果你有另一个内部 GPU，而你的问题被这个内核选项修复了，你应该提交一个 bug，向内核开发者报告这个问题。</p>
+<p>Void 打包的内核被配置为 <code>CONFIG_INTEL_IOMMU_DEFAULT_ON=y</code>，这可能导致其图形驱动的问题，正如<a href="https://www.kernel.org/doc/html/latest/x86/iommu.html#graphics-problems">内核文档</a>所报告的。为了解决这个问题，有必要禁用集成 GPU 的 IOMMU。这可以通过在你的<a href="config/graphical-session/graphics-drivers/../../kernel.html#cmdline">内核 cmdline</a> 中添加 <code>intel_iommu=igfx_off</code>来完成。这个问题预计会发生在 Broadwell 一代的内部 GPU 上。如果你有另一个内部 GPU，而你的问题被这个内核选项修复了，你应该提交一个 bug，向内核开发者报告这个问题。</p>
 <p>对于较新的英特尔芯片组，<a href="config/graphical-session/graphics-drivers/../xorg.html#ddx">DDX</a> 驱动程序可能会干扰正确的操作。表现为图形加速不工作和一般图形不稳定。如果是这种情况，请尝试删除所有 <code>xf86-video-*</code> 软件包。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="nvidia"><a class="header" href="#nvidia">NVIDIA</a></h1>
 <h2 id="nouveau-开源驱动"><a class="header" href="#nouveau-开源驱动">nouveau (开源驱动)</a></h2>
@@ -1628,20 +1641,20 @@ NVRM: at www.nvidia.com.
 <p>Void 支持的方法的摘要，这些方法是相互排斥的。</p>
 <p><a href="config/graphical-session/graphics-drivers/optimus.html#prime-render-offload">PRIME Render Offload</a></p>
 <ul>
-<li>只适用于 <code>NVIDIA</code></li>
+<li>适用于 <code>nvidia</code> 和 <code>nvidia470</code></li>
 <li>允许在每个应用的基础上切换到英伟达 GPU。</li>
 <li>更加灵活，但省电能力取决于硬件（pre-Turing 之前的设备不会完全关闭）。</li>
 <li></li>
 </ul>
 <p>Offloading Graphics Display with RandR 1.4</p>
 <ul>
-<li>可在 <code>nvidia</code> 和 <code>nvidia390</code> 上使用</li>
+<li>可在 <code>nvidia</code> , <code>nvidia470</code> 和 <code>nvidia390</code> 上使用</li>
 <li>允许选择在 X session 开始时使用哪个 GPU</li>
 <li>灵活性较差，但允许用户在不使用 NVIDIA GPU 时完全关闭，从而节省电力</li>
 </ul>
 <p><a href="config/graphical-session/graphics-drivers/optimus.html#bumblebee">Bumblebee</a></p>
 <ul>
-<li>可在 <code>nvidia</code> 和 <code>nvidia390</code> 上使用</li>
+<li>可在 <code>nvidia</code> , <code>nvidia470</code> 和 <code>nvidia390</code> 上使用</li>
 <li>允许在每个应用的基础上切换到英伟达 GPU</li>
 <li>非官方的方法，性能不佳</li>
 </ul>
@@ -1736,6 +1749,7 @@ exec /bin/i3
 <li>Hikari：基于 wlroots 并受 cwm 启发开发，在 FreeBSD 上开发很活跃，但也支持 Linux</li>
 <li>Cage: 显示单个全屏应用程序（就像自助取款机的显示界面那样）</li>
 <li>River：动态平铺 Wayland 混成器，受 dwm 和 bspwm 启发</li>
+<li>labwc: 是一个堆叠式混成器，灵感来自　OpenBox</li>
 </ul>
 <h3 id="显卡驱动-2"><a class="header" href="#显卡驱动-2">显卡驱动</a></h3>
 <p>GNOME 和 KDE Plasma 都有针对 Wayland 的 EGLStreams 后端，这意味着它们可以使用 NVIDIA 专有的驱动程序。其他大多数 Wayland 混成器需要实现 GBM 接口的驱动。用于这一目的的主要驱动由 <code>mesa-dri</code> 软件包提供。<a href="config/graphical-session/./graphics-drivers/index.html">图形化驱动</a>&quot; 一节有关于在不同系统中设置图形的更多细节。</p>
@@ -1833,33 +1847,21 @@ defaults.pcm.card 2;
 </code></pre>
 <h2 id="session-管理"><a class="header" href="#session-管理">Session 管理</a></h2>
 <p>在 PipeWire 中，会话管理器承担了媒体源的互连以及执行路由策略的责任。没有 Session 管理器，PipeWire 将无法运行。参考 <a href="https://gitlab.freedesktop.org/pipewire/media-session"><code>pipewire-media-session</code></a> 最初在 Void <code>pipewire</code> 包中提供，并配置为默认运行以满足这一要求。然而，<code>pipewire-media-session</code> 已被废弃，作者建议使用 <a href="https://pipewire.pages.freedesktop.org/wireplumber/">WirePlumber</a> 代替它。安装 <code>wireplumber</code> 软件包，以便在 PipeWire 中使用这个 session 管理器。</p>
-<p>标准的 Void 配置会使 <code>pipewire</code> 自动启动 <code>pipewire-media-session</code>，必须重写以使用 <code>wireplumber</code>。唯一需要改变的是，在 <code>context.exec</code> 部分注释掉 <code>pipewire-media-session</code> 的调用，这可以通过一个 <code>sed</code> 的替换来完成。为了使所有用户都能看到这一配置变化，将新的配置文件放在 <code>/etc/pipewire</code> 中：</p>
-<pre><code># mkdir -p /etc/pipewire
-# sed '/path.*=.*pipewire-media-session/s/{/#{/' \
-    /usr/share/pipewire/pipewire.conf &gt; /etc/pipewire/pipewire.conf
-</code></pre>
-<p>或者，将新的配置文件放置在单个用户的预期位置：</p>
-<pre><code>$ : &quot;${XDG_CONFIG_HOME:=${HOME}/.config}&quot;
-$ mkdir -p &quot;${XDG_CONFIG_HOME}/pipewire&quot;
-$ sed '/path.*=.*pipewire-media-session/s/{/#{/' \
-    /usr/share/pipewire/pipewire.conf &gt; &quot;${XDG_CONFIG_HOME}/pipewire/pipewire.conf&quot;
-</code></pre>
 <blockquote>
-<p>在 <code>/etc/pipewire</code> 或 <code>${XDG_CONFIG_HOME}/pipewire</code> 中的自定义 <code>pipewire.conf</code> 将完全阻止使用默认的系统配置。鼓励覆盖默认配置以启用 <code>wireplumber</code> 的用户监控默认配置，并在每次 <code>pipewire</code> 更新时核对任何变化。</p>
+<p>如果您安装了早期版本的 Void <code>pipewire</code> 封装，确保更新您的系统以消除任何陈旧的系统配置可能会尝试启动 <code>pipewire-media-session</code>。 之前覆盖的用户要使用的系统配置 <code>wireplumber</code>， 例如,通过放置自定义 <code>pipewire.conf</code> 文件输入 <code>/etc/pipewire</code> 或者 <code>${XDG_CONFIG_HOME}/pipewire</code>， 可能希望将这些覆盖与 <code>/usr/share/pipewire/pipewire.conf</code> 由最新安装的 <code>pipewire</code> 包裹。 如果想禁用之前的覆盖 <code>pipewire-media-session</code>，删除自定义配置可能就足够了。</p>
 </blockquote>
-<p>现在，配置 <code>wireplumber</code>，使之与 <code>pipewire</code> 同时启动。如果你的窗口管理器或桌面环境的自动启动机制是用来启动<code>pipewire</code> 的，建议使用同样的机制来启动 <code>wireplumber</code>。<code>wireplumber</code> 软件包包括一个<code>wireplumber.desktop</code> Desktop Entry 文件，在这种情况下可能有用。</p>
+<p>有几种方法可以同时启动 <code>wireplumber</code> 和 <code>pipewire</code>。如果你的窗口管理器或桌面环境的自动启动机制被用来启动 <code>pipewire</code>，建议使用相同的机制来启动<code>wireplumber</code>。<code>wireplumber</code> 软件包包括一个 <code>wireplumber.desktop</code> 桌面文件，在这种情况下可能很有用。</p>
 <blockquote>
 <p>请注意，<code>wireplumber</code> 必须在 <code>pipewire</code> 可执行文件之后启动。桌面应用程序自动启动规范没有规定通过桌面入口文件启动的服务的顺序。当依靠这些文件来启动 <code>pipewire</code> 和 <code>wireplumber</code> 时，请查阅你的窗口管理器或桌面环境的文档，以确定是否可以实现服务的正确排序。</p>
 </blockquote>
-<p>如果对独立的 <code>pipewire</code> 和 <code>wireplumber</code> 服务进行适当的排序是不可行的，可以配置 <code>pipewire</code> 来直接启动会话管理器。这可以通过运行:</p>
+<p>如果对独立的 <code>pipewire</code> 和 <code>wireplumber</code> 服务进行适当排序是不可行的，可以配置 <code>pipewire</code> 来直接启动会话管理器。这可以通过运行</p>
 <pre><code># mkdir -p /etc/pipewire/pipewire.conf.d
-# echo 'context.exec = [ { path = &quot;/usr/bin/wireplumber&quot; args = &quot;&quot; } ]' \
-    &gt; /etc/pipewire/pipewire.conf.d/10-wireplumber.conf
+# ln -s /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
 </code></pre>
-<p>系统配置，或对于每个用户的配置，运行</p>
-<pre><code>$ mkdir -p &quot;${XDG_CONFIG_HOME}/pipewire/pipewire.conf.d
-$ echo 'context.exec = [ { path = &quot;/usr/bin/wireplumber&quot; args = &quot;&quot; } ]' \
-    &gt; &quot;${XDG_CONFIG_HOME}/pipewire/pipewire.conf.d/10-wireplumber.conf&quot;
+<p>系统配置，或者，对于每个用户的配置，运行</p>
+<pre><code>$ true &quot;${XDG_CONFIG_HOME:=${HOME}/.config}&quot;
+$ mkdir -p &quot;${XDG_CONFIG_HOME}/pipewire/pipewire.conf.d&quot;
+# ln -s /usr/share/examples/wireplumber/10-wireplumber.conf &quot;${XDG_CONFIG_HOME}/pipewire/pipewire.conf.d/&quot;
 </code></pre>
 <p>在这些配置中，启动 <code>pipewire</code> 应该足以建立一个使用 <code>wireplumber</code> 进行会话管理的工作的 PipeWire session。</p>
 <p>在其默认配置中，WirePlumber 需要一个活跃的 D-Bus 会话。如果你的桌面环境或窗口管理器被配置为提供 D-Bus 会话以及启动 <code>pipewire</code> 和 <code>wireplumber</code>，则不需要进一步配置。希望单独启动 <code>pipewire</code> 的用户，例如在<code>.xinitrc</code> 脚本中，可能会发现有必要配置 <code>pipewire</code> 来直接启动 <code>wireplumber</code>，并将 <code>pipewire</code> 的调用包装为</p>
@@ -1877,7 +1879,7 @@ Server Name: PulseAudio (on PipeWire 0.3.18)
 </code></pre>
 <p>一旦你确认 <code>pipewire-pulse</code> 如预期般工作，建议在启动 PipeWire 的地方自动启动它。可以修改 <a href="https://man.voidlinux.org/pipewire.conf.5">pipewire.conf(5)</a> 来自动启动 PulseAudio 服务器，但不建议保持 PipeWire 配置文件不被修改，以便将来更顺利地升级。</p>
 <h2 id="蓝牙音频"><a class="header" href="#蓝牙音频">蓝牙音频</a></h2>
-<p>为了使蓝牙音频工作，请安装 <code>libspa-Bluetooth</code> 软件包。</p>
+<p>为了使蓝牙音频工作，请安装 <code>libspa-bluetooth</code> 软件包。</p>
 <h2 id="alsa-集成"><a class="header" href="#alsa-集成">ALSA 集成</a></h2>
 <p>安装 <code>alsa-pipewire</code> ，然后启用 PipeWire ALSA 设备并使其成为默认设备:</p>
 <pre><code># mkdir -p /etc/alsa/conf.d
@@ -1898,7 +1900,7 @@ Server Name: PulseAudio (on PipeWire 0.3.18)
 <div style="break-before: page; page-break-before: always;"></div><h1 id="pulseaudio"><a class="header" href="#pulseaudio">PulseAudio</a></h1>
 <p>根据您使用的应用程序,您可能需要为 PulseAudio 提供 D-BUS session bus（例如通过 dbus-run-session）或 D-BUS system bus（通过 dbus 服务）。</p>
 <p>对于直接使用 ALSA 而不支持 PulseAudio 的应用程序， <code>alsa-plugins-pulseaudio</code> 包可以使它们通过 ALSA 使用 PulseAudio。</p>
-<p>PulseAudio 软件包带有服务文件，这在大多数设置中是不必要的,PulseAudio维护者<a href="https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SystemWide/">不鼓励</a>使用全系统的设置。相反，PulseAudio 会在需要时自动启动。如果它没有自动启动，可以通过在终端调用 <a href="https://man.voidlinux.org/pulseaudio.1">pulseaudio(1)</a> 来手动启动它，方法如下。</p>
+<p>PulseAudio 会在需要时自动启动。如果它没有自动启动，可以通过从终端调用 <a href="https://man.voidlinux.org/pulseaudio.1">pulseaudio(1)</a> 来手动启动它，方法如下：</p>
 <pre><code>$ pulseaudio --daemonize=no --exit-idle-time=-1
 </code></pre>
 <p>另一方面，PulseAudio 也可能在不需要的时候被自动激活。为了进展这种行为，可以将 <a href="https://man.voidlinux.org/pulse-client.conf.5">pulse-client.conf(5)</a> 中的 <code>autospawn</code> 指令设置为 <code>no</code>。</p>
@@ -2044,6 +2046,10 @@ ID TYPE     DEVICE      SOFT      HARD
 </code></pre>
 <h3 id="brother-驱动"><a class="header" href="#brother-驱动">Brother 驱动</a></h3>
 <p>对于 Brother 打印机的支持，请安装 foomatic 驱动程序，它包含在 <code>foomatic-db</code> 和 <code>foomatic-db-nonfree</code> 软件包中。对各种激光打印机型号的支持是由 <code>brother-brlaser</code> 软件包提供的。</p>
+<h3 id="epson-喷墨打印机的驱动"><a class="header" href="#epson-喷墨打印机的驱动">Epson 喷墨打印机的驱动</a></h3>
+<p>请安装 <code>epson-inkjet-printer-escpr</code>。</p>
+<h3 id="canon-pixmamaxify-驱动"><a class="header" href="#canon-pixmamaxify-驱动">Canon PIXMA/MAXIFY 驱动</a></h3>
+<p><code>cnijfilter2</code> 软件包包含了用于佳能 PIXMA 和 MAXIFY 各种型号的驱动程序。请注意，安装该驱动包<a href="config/print/../../xbps/repositories/index.html#nonfree">需要启用 &quot;非自由&quot; 软件源</a>。</p>
 <h2 id="配置新打印机"><a class="header" href="#配置新打印机">配置新打印机</a></h2>
 <p>CUPS 提供了一个 Web 界面和命令行工具，可用于配置打印机。 此外，还提供各种本机 GUI 选项，并且 可能更适合，具体取决于用例。 </p>
 <h3 id="自动地"><a class="header" href="#自动地">自动地</a></h3>
